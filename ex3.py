@@ -22,8 +22,10 @@ best_two_rounds = []
 for row in ddt:
     row_max = max(row)
     idx = np.where(row == row_max)[0]
+    two_round_max = 0
     for i in idx:
-        two_round_max = max(ddt[i])
+        if max(ddt[i]) > two_round_max:
+            two_round_max = max(ddt[i])
 
     print(row_max, two_round_max)
     best_two_rounds.append(row_max / 16 * two_round_max / 16)
