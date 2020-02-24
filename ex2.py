@@ -41,12 +41,14 @@ def find_k1_from_ciphertext(m_pairs, ciphertexts):
     return np.argmax(k1_counters)
 
 def check_key_validity(keys):
-    failure = False
+    valid = True
     for msg in m:
         ciph = S[S[S[msg ^ keys[0]] ^keys[1]] ^ keys[2]] ^ keys[3]
-        failure = ciph != c[msg]
+        valid = ciph == c[msg]
+        if not valid:
+            break
 
-    return failure
+    return valid
 
 def main():
     m_pairs = find_pairs_with_diff(m, 15)
@@ -66,8 +68,8 @@ def main():
     k0 = m[0] ^ u0
 
     print(f"k0: {k0}, k1: {k1}, k2: {k2}, k3: {k3}")
-    failure = check_key_validity([k0, k1, k2, k3])
-    print(f"Fails? {failure}")
+    valid = check_key_validity([k0, k1, k2, k3])
+    print(f"Valid? {valid}")
     
 
 if __name__ == '__main__':
