@@ -19,17 +19,20 @@ ddt[14] = [0, 2, 0, 4, 2, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 6]
 ddt[15] = [0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 10, 0, 2]
 
 best_two_rounds = []
-for row in ddt:
+for row_idx, row in enumerate(ddt):
     row_max = max(row)
     idx = np.where(row == row_max)[0]
     two_round_max = 0
+    col_idx = 0
     for i in idx:
         if max(ddt[i]) > two_round_max:
             two_round_max = max(ddt[i])
+            col_idx = i
+            end_idx = np.argmax(ddt[i])
 
     print(row_max, two_round_max)
-    best_two_rounds.append(row_max / 16 * two_round_max / 16)
+    best_two_rounds.append((row_max / 16 * two_round_max / 16, row_idx, col_idx, end_idx))
 
-print(f"Probabilities: {best_two_rounds}")
+print(f"Probabilities: {best_two_rounds}\n")
 print(f"Highest Probability: {max(best_two_rounds)}")
     

@@ -55,6 +55,7 @@ def main():
     c_dict = {}
     for idx, msg in enumerate(m):
         c_dict[msg] = c[idx]
+        
     k2 = find_k2(m_pairs, c_dict)
 
     x = [k2 ^ e for e in c]

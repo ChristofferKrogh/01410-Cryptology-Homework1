@@ -24,7 +24,7 @@ def find_key_from_ciphertext(m_pairs, ciphertexts, difference):
             z1 = c1 ^ key_guess
             if negS[z0] ^ negS[z1] == difference:
                 counters[key_guess] += 1
-
+    print(f"counters:\n{counters}")
     return np.argmax(counters)
 
 def find_k1_from_ciphertext(m_pairs, ciphertexts):
